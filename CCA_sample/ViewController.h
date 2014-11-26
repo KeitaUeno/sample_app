@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface ViewController : UIViewController
+@interface ViewController :UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+
+
+@property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
+
+- (IBAction)CallCamera:(id)sender;
+- (IBAction)CallPhotoLibrary:(id)sender;
 
 @end
 

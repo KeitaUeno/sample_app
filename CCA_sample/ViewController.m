@@ -24,4 +24,35 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)CallCamera:(id)sender {
+    UIImagePickerControllerSourceType sourceType
+    = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.sourceType = sourceType;
+        picker.delegate = self;
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
+}
+
+- (IBAction)CallPhotoLibrary:(id)sender {
+    UIImagePickerControllerSourceType sourceType
+    = UIImagePickerControllerSourceTypePhotoLibrary;
+    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.sourceType = sourceType;
+        picker.delegate = self;
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker
+  didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.mainImageView.image = image;
+    }];
+}
+
 @end
